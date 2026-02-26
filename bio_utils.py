@@ -219,15 +219,19 @@ def find_clumps(
     d-mismatches and, optionally, its reverse complement) within some
     window of length *L*.
 
+    Parameters
+    ----------
+    sequence : DNA string
+    k        : k-mer length
+    L        : window length
+    t        : minimum occurrence count
+    d        : allowed mismatches (0 = exact match only)
+    use_rc   : if True, reverse-complement occurrences are also counted
+
     Returns a list of tuples:
-        (kmer, first_window_position, exact_count, variant_count)
+        (kmer, first_window_position, max_exact_count, max_variant_count)
 
-    Algorithm: sliding window of width L.
-    - On each slide, remove the leftmost k-mer's contribution and add the
-      newly entering k-mer's contribution.
-    - Neighborhoods are memoised to avoid recomputation.
-
-    Complexity: O(n · N)  where N is the neighborhood size.
+    Complexity: O(n · N)
     """
     n = len(sequence)
     if n < L:
@@ -243,9 +247,11 @@ def find_clumps(
             memo_neighborhood[kmer] = variants
         return memo_neighborhood[kmer]
 
-    # freq_map[variant] = {'q': deque of (position, is_exact), 'exact': int, 'var': int}
     freq_map: dict = {}
-    clumps: dict = {}   # variant -> first tuple that reached threshold
+
+    # Tracks the best snapshot ever recorded for each variant
+    # best[variant] = (first_pos, exact, var) at the moment of highest total
+    best: dict = {}
 
     def add_kmer(kmer: str, pos: int):
         for variant in get_variants(kmer):
@@ -257,14 +263,13 @@ def find_clumps(
                 freq_map[variant]["exact"] += 1
             else:
                 freq_map[variant]["var"] += 1
-            if (freq_map[variant]["exact"] + freq_map[variant]["var"]) >= t:
-                if variant not in clumps:
+
+            total = freq_map[variant]["exact"] + freq_map[variant]["var"]
+            if total >= t:
+                prev_best_total = best[variant][1] + best[variant][2] if variant in best else 0
+                if total > prev_best_total:
                     first_pos = freq_map[variant]["q"][0][0]
-                    clumps[variant] = (
-                        variant, first_pos,
-                        freq_map[variant]["exact"],
-                        freq_map[variant]["var"],
-                    )
+                    best[variant] = (first_pos, freq_map[variant]["exact"], freq_map[variant]["var"])
 
     def remove_kmer(kmer: str):
         for variant in get_variants(kmer):
@@ -284,8 +289,9 @@ def find_clumps(
         idx_in = i + L - k
         add_kmer(sequence[idx_in: idx_in + k], idx_in)
 
-    return list(clumps.values())
-
+    results = [(variant, pos, exact, var) for variant, (pos, exact, var) in best.items()]
+    results.sort(key=lambda x: (x[2] + x[3], x[2]), reverse=True)
+    return results
 
 def clean_clump_noise(clump_results: list, d: int = 1) -> list:
     """
