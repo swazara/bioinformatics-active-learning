@@ -68,14 +68,13 @@ def main():
             dna_seq = lines[0].strip()
             k= lines[1].strip()
             
-            d_match_set = compute_frequencies_rolling(dna_seq, int(k))
-            
-            print(" ".join(map(str, d_match_set)))
-            
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    d_match_set = compute_frequencies_rolling(dna_seq, int(k))
+    print(" ".join(map(str, d_match_set)))
+    
 if __name__ == "__main__":
     main()

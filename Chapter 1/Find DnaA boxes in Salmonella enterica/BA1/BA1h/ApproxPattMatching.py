@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1H
 Title: Find All Approximate Occurrences of a Pattern in a String
-URL: https://rosalind.info/problems/ba1h/
+URL: https://rosalind.info/problems/BA1h/
 
 Description:
 This script finds and returns all starting positions where the
@@ -46,14 +46,14 @@ def main():
             patt = lines[0].strip()
             seq = lines[1].strip()
             d = lines[2].strip()
-
-            d_match_list = approximate_pattern_matching(patt, seq, int(d))
-            print(" ".join(map(str, d_match_list)))
             
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    d_match_list = approximate_pattern_matching(patt, seq, int(d))
+    print(" ".join(map(str, d_match_list)))
+    
 if __name__ == "__main__":
     main()

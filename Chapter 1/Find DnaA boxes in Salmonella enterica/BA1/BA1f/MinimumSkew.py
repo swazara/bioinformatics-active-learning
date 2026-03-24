@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1F
 Title: Find All Local Minima of the Skew Diagram
-URL: https://rosalind.info/problems/ba1f/
+URL: https://rosalind.info/problems/BA1f/
 
 Description:
 This script identifies all positions 'i' (from 0 to |Genome|) where the 
@@ -37,21 +37,20 @@ def minimumSkew(dna_seq):
 
 def main():
     if len(sys.argv) != 2:
-        print("Use: python script.py file.txt")
+        print("Use: python MinimumSkew.py file.txt")
         return
 
     try:
         with open(sys.argv[1], 'r', encoding='utf-8') as f:
             dna_seq = f.read().strip()
             
-            skew_mins = minimumSkew(dna_seq)
-
-            print(" ".join(map(str, skew_mins)))
-            
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    skew_mins = minimumSkew(dna_seq)
+    print(" ".join(map(str, skew_mins)))
+    
 if __name__ == "__main__":
     main()

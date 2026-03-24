@@ -2,7 +2,8 @@
 """
 Rosalind Problem ID: BA1A
 Title: Compute the Number of Times a Pattern Appears in a Text
-URL: https://rosalind.info/problems/ba1a/
+URL: https://rosalind.info/probletotal_count = count_pattern_occurrences(sequence, pattern)
+            print(f"{total_count} occurrences found.")ms/BA1a/
 
 Description:
 Basic pattern-matching algorithm to count the total occurrences of a 
@@ -39,15 +40,13 @@ def main():
             sequence = lines[0].strip()
             pattern = lines[1].strip()
             
-            print(f"--- Processing: {file_path} (Pattern = {pattern}) ---")
-            
-            total_count = count_pattern_occurrences(sequence, pattern)
-            print(f"{total_count} occurrences found.")
-            
     except FileNotFoundError:
         print(f"Error: The file '{file_path}' was not found.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    total_count = count_pattern_occurrences(sequence, pattern)
+    print(total_count)
+    
 if __name__ == "__main__":
     main()

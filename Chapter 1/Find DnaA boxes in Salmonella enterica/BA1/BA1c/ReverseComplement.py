@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1C
 Title: Find the Reverse Complement of a String
-URL: https://rosalind.info/problems/ba1c/
+URL: https://rosalind.info/problems/BA1c/
 
 Description:
 This script returns the reverse complement of a DNA sequence.
@@ -37,13 +37,13 @@ def main():
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             sequence = f.readlines()[0].strip()
-
-            print(get_reverse_complement(sequence))
             
     except FileNotFoundError:
         print(f"Error: The file '{file_path}' does not exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    print(get_reverse_complement(sequence))
+    
 if __name__ == "__main__":
     main()

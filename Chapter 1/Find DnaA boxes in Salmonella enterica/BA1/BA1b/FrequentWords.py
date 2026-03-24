@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1B
 Title: Find the Most Frequent Words in a String
-URL: https://rosalind.info/problems/ba1b/
+URL: https://rosalind.info/problems/BA1b/
 
 Description:
 This script identifies the most frequent k-mers (patterns of length k) in a 
@@ -57,19 +57,17 @@ def main():
             sequence = lines[0].strip()
             k = int(lines[1].strip())
             
-            print(f"--- Processing: {file_path} (k={k}) ---")
-            
-            if len(sequence) < k:
-                print("Error: The sequence is shorter than k.")
-                return
-                
-            result_patterns = find_frequent_words(sequence, k)
-            print(" ".join(result_patterns))
-            
     except FileNotFoundError:
         print(f"Error: The file '{file_path}' was not found.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+
+    if len(sequence) < k:
+        print("Error: The sequence is shorter than k.")
+        return
+                
+    result_patterns = find_frequent_words(sequence, k)
+    print(" ".join(result_patterns))
 
 if __name__ == "__main__":
     main()

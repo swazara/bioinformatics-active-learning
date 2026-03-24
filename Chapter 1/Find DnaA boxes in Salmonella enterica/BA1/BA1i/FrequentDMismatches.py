@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1i
 Title: Find the Most Frequent Words with Mismatches in a String
-URL: https://rosalind.info/problems/ba1i/
+URL: https://rosalind.info/problems/BA1i/
 
 Description:
 This script receives a string (dna sequence) as well as integers k and d,
@@ -66,14 +66,14 @@ def main():
             lines = f.readlines()
             dna_seq = lines[0].strip()
             k, d = (lines[1].strip()).split()
-            d_match_set = frequent_pattern_mismatches(dna_seq, int(k), int(d))
-            
-            print(" ".join(map(str, d_match_set)))
             
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
 
+    d_match_set = frequent_pattern_mismatches(dna_seq, int(k), int(d))        
+    print(" ".join(map(str, d_match_set)))
+    
 if __name__ == "__main__":
     main()

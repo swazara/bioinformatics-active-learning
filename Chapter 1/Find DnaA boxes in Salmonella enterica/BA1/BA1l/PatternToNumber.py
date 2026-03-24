@@ -44,13 +44,12 @@ def main():
             lines = f.readlines()
             pattern = lines[0].strip()
             
-            print(patternToNumber(pattern))
-            
-            
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+    
+    print(patternToNumber(pattern))
 
 if __name__ == "__main__":
     main()

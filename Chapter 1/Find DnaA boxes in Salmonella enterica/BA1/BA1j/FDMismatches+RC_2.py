@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1j
 Title: Frequent Words with Mismatches and Reverse Complements Problem
-URL: https://rosalind.info/problems/ba1j/
+URL: https://rosalind.info/problems/BA1j/
 
 Description:
 This script receives a string (DNA sequence) as well as integers k and d.
@@ -68,7 +68,7 @@ def frequent_pattern_mismatches(dna_seq, k, d, n=1):
 
 def main():
     if len(sys.argv) != 2:
-        print("Use: python FrequentDMismatches.py <input.txt>")
+        print("Use: python FrequentDMismatches+RC_2.py <input.txt>")
         return
 
     try:
@@ -76,14 +76,14 @@ def main():
             lines = f.readlines()
             dna_seq = lines[0].strip()
             k, d = (lines[1].strip()).split()
-            d_match_set = frequent_pattern_mismatches(dna_seq, int(k), int(d))
-            
-            print(" ".join(map(str, d_match_set)))
             
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+    
+    d_match_set = frequent_pattern_mismatches(dna_seq, int(k), int(d))
+    print(" ".join(map(str, d_match_set)))
 
 if __name__ == "__main__":
     main()

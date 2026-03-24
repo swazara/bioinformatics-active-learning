@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1E
 Title: Find Patterns Forming Clumps in a Real Genome
-URL: https://rosalind.info/problems/ba1e/
+URL: https://rosalind.info/problems/BA1e/
 
 Description:
 This script identifies (k, L, t)-clumps in a genomic sequence. A k-mer forms 
@@ -53,16 +53,15 @@ def main():
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()    
             sequence = lines[0].strip()
-            k, l_window, t = map(int, lines[1].split())
-            
-            result_clumps = find_clumps(sequence, k, l_window, t)
-
-            print(" ".join(result_clumps))
+            k, l_window, t = map(int, lines[1].split())            
             
     except FileNotFoundError:
         print(f"Error: The file '{file_path}' was not found.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+
+    result_clumps = find_clumps(sequence, k, l_window, t)
+    print(" ".join(result_clumps))
 
 if __name__ == "__main__":
     main()

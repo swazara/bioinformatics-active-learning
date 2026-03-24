@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1G
 Title: Compute the Hamming Distance Between Two Strings
-URL: https://rosalind.info/problems/ba1g/
+URL: https://rosalind.info/problems/BA1g/
 
 Description:
 This script finds mismatches between two strings and then returns 
@@ -36,16 +36,16 @@ def main():
             lines = f.readlines()
             p = lines[0].strip()
             q = lines[1].strip()
-
-            if len(p) != len(q):
-                return
-            
-            print(hamming_distance(p,q))
             
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+    
+    if len(p) != len(q):
+        return
+    
+    print(hamming_distance(p,q))
 
 if __name__ == "__main__":
     main()

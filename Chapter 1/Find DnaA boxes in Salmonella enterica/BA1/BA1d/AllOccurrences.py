@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1D
 Title: Find All Occurrences of a Pattern in a String
-URL: https://rosalind.info/problems/ba1d/
+URL: https://rosalind.info/problems/BA1d/
 
 Description:
 This script finds all starting positions where a given pattern appears as a 
@@ -45,15 +45,14 @@ def main():
             pattern = lines[0]
             sequence = lines[1]
             
-            occurrences = find_pattern_occurrences(sequence, pattern)
-
-            # Expected output
-            print(" ".join(map(str, occurrences)))
             
     except FileNotFoundError:
         print(f"Error: The file '{file_path}' was not found.")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
+    
+    occurrences = find_pattern_occurrences(sequence, pattern)
+    print(" ".join(map(str, occurrences)))
 
 if __name__ == "__main__":
     main()

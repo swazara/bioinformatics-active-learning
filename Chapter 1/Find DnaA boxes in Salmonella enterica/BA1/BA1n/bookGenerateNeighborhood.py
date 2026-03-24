@@ -2,7 +2,7 @@
 """
 Rosalind Problem ID: BA1n
 Title: Generate the d-Neighborhood of a String
-URL: https://rosalind.info/problems/ba1n/
+URL: https://rosalind.info/problems/BA1n/
 
 Description:
 This script returns all the k-mers within at most a *d* hamming distance 
@@ -51,14 +51,14 @@ def main():
             lines = f.readlines()
             patt = lines[0].strip()
             d = lines[1].strip()
-
-            d_neigh = d_neighborhood(patt, int(d))
-            print("\n".join(map(str, d_neigh)))
             
     except FileNotFoundError:
         print(f"Error: The '{sys.argv[1]}' file doesn't exist.")
     except Exception as e:
         print(f"Unexpected error: {e}")
+    
+    d_neigh = d_neighborhood(patt, int(d))
+    print("\n".join(map(str, d_neigh)))
 
 if __name__ == "__main__":
     main()
